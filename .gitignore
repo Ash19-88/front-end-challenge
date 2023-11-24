@@ -23,5 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 *.docx
+coverage/
 
 package-lock.json

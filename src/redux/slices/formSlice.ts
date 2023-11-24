@@ -4,7 +4,7 @@ import { TypedUseSelectorHook, useSelector } from "react-redux";
 
 interface FormState {
   fields: any[];
-  submittedData: any;
+  submitedData: any;
 }
 
 type RootState = {
@@ -13,7 +13,7 @@ type RootState = {
 
 const initialState: FormState = {
   fields: formFields,
-  submittedData: {},
+  submitedData: {},
 };
 
 const formSlice = createSlice({
@@ -25,15 +25,20 @@ const formSlice = createSlice({
       const fieldsFlat = state.fields.flat();
       const fieldIndex = fieldsFlat.findIndex((field) => field.id === id);
       if (fieldIndex !== -1) {
-        const updatedFields = [...fieldsFlat];
-        updatedFields[fieldIndex].value = value;
-        state.fields = updatedFields;
+        fieldsFlat[fieldIndex].value = value;
+        state.fields = fieldsFlat;
+      } else {
+        const newField = { id, value };
+        state.fields.push(newField);
       }
     },
+
     submitForm: (state) => {
-      state.submittedData = {};
+      state.submitedData = {};
       state.fields.forEach((field) => {
-        state.submittedData[field.id] = field.value;
+        if (field.value !== "") {
+          state.submitedData[field.id] = field.value;
+        }
       });
     },
   },
