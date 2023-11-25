@@ -8,6 +8,7 @@ import {
 
 const Form: React.FC = () => {
   const fields = useTypedSelector((state) => state.form.fields);
+  const errors = useTypedSelector((state) => state.form.errors);
 
   const dispatch = useDispatch();
 
@@ -79,6 +80,10 @@ const Form: React.FC = () => {
           );
         }
       })}
+      <div style={{ color: "red" }}>{errors.firstName}</div>
+      <div>{errors.lastName}</div>
+      <div>{errors.Email}</div>
+      <div>{errors.phone}</div>
 
       <button type="submit">Submit</button>
     </form>
