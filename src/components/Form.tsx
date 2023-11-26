@@ -5,6 +5,15 @@ import {
   updateField,
   useTypedSelector,
 } from "../redux/slices/formSlice";
+import { StyledForm } from "./styledComponents/StyledForm";
+import { StyledInput } from "./styledComponents/StyledInput";
+import { FieldContainer } from "./styledComponents/FieldContainer";
+import { StyledSelect } from "./styledComponents/StyledSelect";
+import { StyledTextarea } from "./styledComponents/StyledTextarea";
+import { ErrorsContainer } from "./styledComponents/ErrorsContainer";
+import { Button } from "./styledComponents/Button";
+import { InputContainer } from "./styledComponents/InputContainer";
+import { ArrayInputs } from "./styledComponents/ArrayInputs";
 
 const Form: React.FC = () => {
   const fields = useTypedSelector((state) => state.form.fields);
@@ -22,25 +31,29 @@ const Form: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <StyledForm onSubmit={handleSubmit}>
       {fields.map((field) => {
         if (Array.isArray(field)) {
-          return field.map((subField) => (
-            <div key={subField.id}>
-              <input
-                id={subField.id}
-                placeholder={subField.placeholder}
-                required={subField.required}
-                type={subField.type}
-                value={subField.value}
-                onChange={(e) => handleChange(subField.id, e.target.value)}
-              />
-            </div>
-          ));
+          return (
+            <FieldContainer>
+              {field.map((subField) => (
+                <InputContainer key={subField.id}>
+                  <ArrayInputs
+                    id={subField.id}
+                    placeholder={subField.placeholder}
+                    required={subField.required}
+                    type={subField.type}
+                    value={subField.value}
+                    onChange={(e) => handleChange(subField.id, e.target.value)}
+                  />
+                </InputContainer>
+              ))}
+            </FieldContainer>
+          );
         } else if (field.type === "select") {
           return (
-            <div key={field.id}>
-              <select
+            <InputContainer key={field.id}>
+              <StyledSelect
                 id={field.id}
                 value={field.value}
                 onChange={(e) => handleChange(field.id, e.target.value)}
@@ -50,25 +63,25 @@ const Form: React.FC = () => {
                     {option}
                   </option>
                 ))}
-              </select>
-            </div>
+              </StyledSelect>
+            </InputContainer>
           );
         } else if (field.type === "textarea") {
           return (
-            <div key={field.id}>
-              <textarea
+            <InputContainer key={field.id}>
+              <StyledTextarea
                 id={field.id}
                 placeholder={field.placeholder}
                 required={field.required}
                 value={field.value}
                 onChange={(e) => handleChange(field.id, e.target.value)}
               />
-            </div>
+            </InputContainer>
           );
         } else {
           return (
-            <div key={field.id}>
-              <input
+            <InputContainer key={field.id}>
+              <StyledInput
                 id={field.id}
                 placeholder={field.placeholder}
                 required={field.required}
@@ -76,17 +89,19 @@ const Form: React.FC = () => {
                 value={field.value}
                 onChange={(e) => handleChange(field.id, e.target.value)}
               />
-            </div>
+            </InputContainer>
           );
         }
       })}
-      <div style={{ color: "red" }}>{errors.firstName}</div>
-      <div>{errors.lastName}</div>
-      <div>{errors.Email}</div>
-      <div>{errors.phone}</div>
+      <ErrorsContainer>
+        {errors.firstName && <li>{errors.firstName}</li>}
+        {errors.lastName && <li>{errors.lastName}</li>}
+        {errors.Email && <li>{errors.Email}</li>}
+        {errors.phone && <li>{errors.phone}</li>}
+      </ErrorsContainer>
 
-      <button type="submit">Submit</button>
-    </form>
+      <Button type="submit">Submit</Button>
+    </StyledForm>
   );
 };
 

@@ -1,18 +1,20 @@
 [
-  {
-    "id": "firstName",
-    "placeholder": "First name",
-    "required": true,
-    "type": "text",
-    "value": ""
-  },
-  {
-    "id": "lastName",
-    "placeholder": "Last name",
-    "required": true,
-    "type": "text",
-    "value": ""
-  },
+  [
+    {
+      "id": "firstName",
+      "placeholder": "First name",
+      "required": true,
+      "type": "text",
+      "value": ""
+    },
+    {
+      "id": "lastName",
+      "placeholder": "Last name",
+      "required": true,
+      "type": "text",
+      "value": ""
+    }
+  ],
   {
     "id": "Email",
     "placeholder": "Email",
