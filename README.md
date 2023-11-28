@@ -30,7 +30,7 @@ Jest is used for unit testing, with a focus on achieving comprehensive test cove
 
 ### Form Fields
 
-The form fields are dynamically generated based on the provided JSON structure (`field-set.js`). Each field object in the array represents one form field.
+The form fields are dynamically generated based on the provided JSON structure (`field-set.json`). Each field object in the array represents one form field.
 
 ### Usability
 
