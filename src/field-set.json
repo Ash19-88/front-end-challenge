@@ -23,8 +23,8 @@
     "value": ""
   },
   {
-    "id": "address1",
-    "placeholder": "Address 1",
+    "id": "address",
+    "placeholder": "Address",
     "type": "text",
     "value": ""
   },

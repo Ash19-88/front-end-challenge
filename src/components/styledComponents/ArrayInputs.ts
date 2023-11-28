@@ -8,4 +8,8 @@ export const ArrayInputs = styled.input`
   border: 1px solid #d9d9d9;
   border-radius: 4px;
   box-sizing: border-box;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;

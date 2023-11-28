@@ -5,12 +5,10 @@ import ThankyouPage from "./components/ThankYouPage";
 
 const App: React.FC = () => {
   return (
-    <div className="App">
-      <Routes>
-        <Route path="/" element={<Form />} />
-        <Route path="/thankyou" element={<ThankyouPage />} />
-      </Routes>
-    </div>
+    <Routes>
+      <Route path="/" element={<Form />} />
+      <Route path="/thankyou" element={<ThankyouPage />} />
+    </Routes>
   );
 };
 

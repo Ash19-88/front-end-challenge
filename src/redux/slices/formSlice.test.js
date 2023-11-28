@@ -5,9 +5,31 @@ describe("formSlice", () => {
   it("should handle updateField", () => {
     const nextState = formReducer(
       undefined,
-      updateField({ id: "1", value: "test" })
+      updateField({ id: "firstName", value: "test" })
     );
-    const field = nextState.fields.find((field) => field.id === "1");
+
+    let field = null;
+    let index = -1;
+
+    for (let i = 0; i < nextState.fieldStructure.length; i++) {
+      const fieldOrArray = nextState.fieldStructure[i];
+
+      if (Array.isArray(fieldOrArray)) {
+        const subField = fieldOrArray.find(
+          (subField) => subField.id === "firstName"
+        );
+        if (subField) {
+          field = subField;
+          index = i;
+          break;
+        }
+      } else if (fieldOrArray.id === "firstName") {
+        field = fieldOrArray;
+        index = i;
+        break;
+      }
+    }
+
     expect(field && field.value).toEqual("test");
   });
   it("should handle updateField and set error for firstName", () => {

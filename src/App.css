@@ -1,6 +1,22 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
+  margin: 0;
   padding: 0;
   text-align: center;
+}
+
+body {
+  margin: 0;
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  background-image: linear-gradient(
+    to top,
+    #d86372,
+    #b05877,
+    #854f70,
+    #5d455f,
+    #3e3946
+  );
+  background-repeat: no-repeat;
 }

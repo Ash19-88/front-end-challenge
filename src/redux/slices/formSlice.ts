@@ -3,9 +3,14 @@ import formFields from "../../field-set.json";
 import { TypedUseSelectorHook, useSelector } from "react-redux";
 
 interface FormState {
-  fields: any[];
   submitedData: any;
   errors: any;
+  fieldStructure: any[];
+}
+
+interface Field {
+  id: string;
+  value: string;
 }
 
 type RootState = {
@@ -13,9 +18,9 @@ type RootState = {
 };
 
 const initialState: FormState = {
-  fields: formFields,
   submitedData: {},
   errors: {},
+  fieldStructure: formFields,
 };
 
 const formSlice = createSlice({
@@ -24,8 +29,19 @@ const formSlice = createSlice({
   reducers: {
     updateField: (state, action) => {
       const { id, value } = action.payload;
-      const fieldsFlat = state.fields.flat();
-      const fieldIndex = fieldsFlat.findIndex((field) => field.id === id);
+      let fieldIndex = -1;
+      state.fieldStructure.forEach((field, index) => {
+        if (Array.isArray(field)) {
+          const subFieldIndex = field.findIndex(
+            (subField: Field) => subField.id === id
+          );
+          if (subFieldIndex !== -1) {
+            fieldIndex = index;
+          }
+        } else if (field.id === id) {
+          fieldIndex = index;
+        }
+      });
       if (fieldIndex !== -1) {
         /* Validations */
         switch (id) {
@@ -61,18 +77,28 @@ const formSlice = createSlice({
             }
             break;
         }
-        fieldsFlat[fieldIndex].value = value;
-        state.fields = fieldsFlat;
-      } else {
-        const newField = { id, value };
-        state.fields.push(newField);
+        if (Array.isArray(state.fieldStructure[fieldIndex])) {
+          state.fieldStructure[fieldIndex].forEach((subField: Field) => {
+            if (subField.id === id) {
+              subField.value = value;
+            }
+          });
+        } else {
+          state.fieldStructure[fieldIndex].value = value;
+        }
       }
     },
 
     submitForm: (state) => {
       state.submitedData = {};
-      state.fields.forEach((field) => {
-        if (field.value !== "") {
+      state.fieldStructure.forEach((field) => {
+        if (Array.isArray(field)) {
+          field.forEach((subField: Field) => {
+            if (subField.value !== "") {
+              state.submitedData[subField.id] = subField.value;
+            }
+          });
+        } else if (field.value !== "") {
           state.submitedData[field.id] = field.value;
         }
       });
