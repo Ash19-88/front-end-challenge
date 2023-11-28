@@ -2,10 +2,12 @@ import { useTypedSelector } from "../redux/slices/formSlice";
 import { FieldContainer } from "./styledComponents/FieldContainer";
 import { InputContainer, Items } from "./styledComponents/InputContainer";
 import {
+  StyledImage,
   StyledThankyouPage,
   Subtitle,
   Title,
 } from "./styledComponents/StyledForm";
+import ThankyouImage from "../../public/thanku.jpg";
 
 const ThankyouPage = () => {
   const submitedData = useTypedSelector((state) => state.form.submitedData);
@@ -15,6 +17,7 @@ const ThankyouPage = () => {
     <StyledThankyouPage>
       <Title>Thank you!</Title>
       <Subtitle>Your Submitted Information</Subtitle>
+      <StyledImage src={ThankyouImage} alt="thank-you-image" />
       {fieldStructure.map((field, index) => {
         if (Array.isArray(field)) {
           return (

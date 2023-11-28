@@ -30,18 +30,18 @@ export const StyledThankyouPage = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  max-width: 60vw;
+  min-width: 50vw;
   margin: auto;
   margin-top: 5vh;
   margin-bottom: 5vh;
   padding: 20px;
   border: 2px silver solid;
   border-radius: 8px;
-  background-color: whitesmoke;
+  background-color: white;
   box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.9);
 
   @media (max-width: 768px) {
-    min-width: 80vw;
+    max-width: 90vw;
   }
 `;
 
@@ -55,4 +55,12 @@ export const Subtitle = styled.h2`
   color: #854f70;
   font-family: sans-serif;
   font-weight: bold;
+`;
+
+export const StyledImage = styled.img`
+  width: 15vw;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
