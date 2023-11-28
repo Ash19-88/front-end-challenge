@@ -12,7 +12,7 @@ import { StyledOption, StyledSelect } from "./styledComponents/StyledSelect";
 import { StyledTextarea } from "./styledComponents/StyledTextarea";
 import { ErrorsContainer } from "./styledComponents/ErrorsContainer";
 import { Button } from "./styledComponents/Button";
-import { InputContainer } from "./styledComponents/InputContainer";
+import { InputContainer, StyledLabel } from "./styledComponents/InputContainer";
 import { ArrayInputs } from "./styledComponents/ArrayInputs";
 import { useNavigate } from "react-router-dom";
 
@@ -44,6 +44,9 @@ const Form: React.FC = () => {
               <FieldContainer key={index}>
                 {field.map((subField) => (
                   <InputContainer key={subField.id}>
+                    <StyledLabel htmlFor={subField.id}>
+                      {subField.title}
+                    </StyledLabel>
                     <ArrayInputs
                       id={subField.id}
                       placeholder={subField.placeholder}
@@ -62,6 +65,7 @@ const Form: React.FC = () => {
           } else if (field.type === "select") {
             return (
               <InputContainer key={field.id}>
+                <StyledLabel htmlFor={field.id}>{field.title}</StyledLabel>
                 <StyledSelect
                   id={field.id}
                   value={field.value}
@@ -79,6 +83,7 @@ const Form: React.FC = () => {
           } else if (field.type === "textarea") {
             return (
               <InputContainer key={field.id}>
+                <StyledLabel htmlFor={field.id}>{field.title}</StyledLabel>
                 <StyledTextarea
                   id={field.id}
                   placeholder={field.placeholder}
@@ -92,6 +97,7 @@ const Form: React.FC = () => {
           } else {
             return (
               <InputContainer key={field.id}>
+                <StyledLabel htmlFor={field.id}>{field.title}</StyledLabel>
                 <StyledInput
                   id={field.id}
                   placeholder={field.placeholder}

@@ -21,7 +21,7 @@ export const StyledSelect = styled.select`
 
 export const StyledOption = styled.option`
   font-family: sans-serif;
-  color: gray;
+  color: #333333;
   appearance: none;
   outline: none;
 `;
