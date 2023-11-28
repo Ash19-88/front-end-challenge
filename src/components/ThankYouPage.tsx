@@ -7,7 +7,7 @@ import {
   Subtitle,
   Title,
 } from "./styledComponents/StyledForm";
-import ThankyouImage from "../../public/thanku.jpg";
+import ThankyouImage from "../thanku.jpg";
 
 const ThankyouPage = () => {
   const submitedData = useTypedSelector((state) => state.form.submitedData);
