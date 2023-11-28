@@ -48,6 +48,7 @@ const Form: React.FC = () => {
                       id={subField.id}
                       placeholder={subField.placeholder}
                       required={subField.required}
+                      title={subField.title}
                       type={subField.type}
                       value={subField.value}
                       onChange={(e) =>
@@ -64,6 +65,7 @@ const Form: React.FC = () => {
                 <StyledSelect
                   id={field.id}
                   value={field.value}
+                  title={field.title}
                   onChange={(e) => handleChange(field.id, e.target.value)}
                 >
                   {field.options.map((option: string, index: any) => (
@@ -80,6 +82,7 @@ const Form: React.FC = () => {
                 <StyledTextarea
                   id={field.id}
                   placeholder={field.placeholder}
+                  title={field.title}
                   required={field.required}
                   value={field.value}
                   onChange={(e) => handleChange(field.id, e.target.value)}
@@ -92,6 +95,7 @@ const Form: React.FC = () => {
                 <StyledInput
                   id={field.id}
                   placeholder={field.placeholder}
+                  title={field.title}
                   required={field.required}
                   type={field.type}
                   value={field.value}
@@ -108,7 +112,9 @@ const Form: React.FC = () => {
           {errors.Email && <li>{errors.Email}</li>}
           {errors.phone && <li>{errors.phone}</li>}
         </ErrorsContainer>
-        <Button type="submit">Submit</Button>
+        <Button type="submit" title="submit">
+          Submit
+        </Button>
       </StyledForm>
     </div>
   );
